@@ -1,103 +1,137 @@
 window.onload = function() { 
-    
+    var questions =[
+            { q:"What do the three pieces of the triforce stand for?", 
+                a0: "Power, Wisdom, and Courage", 
+                a1:"Zelda, Ganondorf, and Link", 
+                a2:"Strength, Bravery, and Wisdom",
+                a3:"the three different lands",
+                    correctAnswer: "a0"},
+            { q:"In Ocarina of Time, how does Zelda hide from Ganondorf?", 
+                a0: "diguises herself as a dude", 
+                a1:"finds a cave in the mountains to hide in", 
+                a2:"travels to the Twilight realm", 
+                a3:"she doesn't, Zelda awaits rescue in Ganandorf's prison",
+                    correctAnswer: "a0"},
+            { q:"In Breath Of The Wild, what are the 4 main races?",
+                a0: "Goron, Gerudo, Hylian, and Zora", 
+                a1:"Fairy, Kokiri, Deku and Rito", 
+                a2:"Rito, Tingles, Yamatami, and Hylian", 
+                a3:"Zora, Goron, Deku, and Anouki",
+                    correctAnswer: "a0"},
+            { q:"ask different questions here3?", 
+                a0: "answer", 
+                a1: "another answer", 
+                a2: "again answer", 
+                a3: "different answer",
+                    correctAnswer: "a0"},
+            ];
 
-   let questions =[
-        { q:"What do the three pieces of the triforce stand for?", a: "Power, Wisdom, and Courage"},
-        { q:"ask different questions here1?", a: "answer", a:"another answer", a:"again answer", a:"different answer"},
-        { q:"ask different questions here2?", a: "answer", a:"another answer", a:"again answer", a:"different answer"},
-        { q:"ask different questions here3?", a: "answer", a:"another answer", a:"again answer", a:"different answer"},
-        // maybe these answers should be there own variable?
-    ];
+    // var gifArray =[]
+    console.log(questions[0].correctAnswer)
+
 
     let correct = 0;
     let wrong = 0;
     let questioni = 0;
 
-    let countDown = 30;
-    let interval = "";
-    
+    let countDown = 5;
+    let interval;
+
+//start button
+$("#button").on("click", startBtn);
+function startBtn() {
+    nextQuestion();
+    document.getElementById("button").style.display = "none"
+}
 
 
-    document.getElementById("button").addEventListener("click", startBtn);
-        function startBtn() {
-        nextQuestion();
-        document.getElementById("button").style.display = "none"
-        
-    }
-
-    function updateCorrect(){
-        document.getElementById("#correct").innerHTML = "Correct: " + correct;
-    }
-
-    function updateWrong(){
-        document.getElementById("#wrong").innerHTML = "wrong: " + wrong;
-    }
-
+//basic game functions
     function nextQuestion() {
-        for (let i = 0; i <questions.length; i++) {
-            if (questioni <= (questions.length - 1)) {
-            document.getElementById("question").textContent = questions[i].q;
-            document.getElementById("answers").textContent = questions[i].a;
-            runTimer();
-            // setTimeout(thirtySec, 1000*30);
-            // function thirtySec(){
-            //     console.log("times up")
-            // }
-            }
+        
+        runTimer();
+    
+        if (questioni <= (questions.length - 1)) {
+                $("#question").html(questions[questioni].q);
+                $("#answer0").html(questions[questioni].a0);
+                $("#answer1").html(questions[questioni].a1);
+                $("#answer2").html(questions[questioni].a2);
+                $("#answer3").html(questions[questioni].a3);
+                console.log("questioni", questioni)
+        }
+        
 
             else {
-            document.getElementById("question").textContent = "Game Over!";
+            $("#question").html("Game Over!");
             updateCorrect()
             updateWrong()
             }
-        }
+        
     }
+    function updateCorrect(){
+        $("#correct").html("Correct: " + correct);
+    }
+
+    function updateWrong(){
+        $("#wrong").html("wrong: " + wrong);
+    }
+
+
+//timer
     function decrement(){
+        if (countDown === 0){
+            console.log("time's up")
+            reset();
+        }
+        else {
         countDown--;
         document.getElementById("countDown").textContent = "Timer: " + countDown;
-        if (countDown === 0){
-            console.log("times up")
-            nextQuestion()
-            runTimer()
-        }
+    }
     }
     function runTimer(){
         clearInterval(interval);
         interval = setInterval(decrement, 1000);
     }
-    function stop(){
-        clearInterval(interval);
-        console.log("stop")
+    function reset(){
+        nextQuestion()
+        
+       countDown = 30;
+       console.log(nextQuestion)
+
     }
+
+
+   
+
         
-        
+// on click right or wrong answer, updates score
+    $(".btn").click(function(event){
+            // stops the function
+            if (questioni === questions.length) {
+            return;
+            }
 
+        var a = $("<button>");
+        a.attr("data-name", );
+        $(".btn").append(a);  
 
+            // If they guess the correct answer
+            if (a === questions[questioni].a0) {
+                // questions[questioni].correctAnswer) 
+                console.log("correct");
+                correct++;
+                updateCorrect();
+            }
+            // If wrong, update score
+            else {
+                console.log("Wrong!");
+                wrong ++;
+                updateWrong()
+                
+            }
 
-
-        // //on click buttton if i have a button
-        // //on key if i have user press enter
-
-        //     // stops the function
-        //     if (questioni === questions.length) {
-        //     return;
-        //     }
-        //     // If they guess the correct answer, increase and update score, alert them they got it right.
-        //     if (userInput === questions[questionIndex].a) {
-        //         alert("Correct!");
-        //         score++;
-        //         updateCorrect();
-        //     }
-        //     // If wrong, update score
-        //     else {
-        //         alert("Wrong!");
-        //         wrong ++;
-        //         updateWrong()
-        //     }
-
-        //     // Increment the questionIndex variable and call the renderQuestion function.
-        //     questioni++;
-        //     nextQuestion();
+         questioni++;
+         nextQuestion();
+        });
 
             
 }
