@@ -1,29 +1,42 @@
 window.onload = function() { 
     var questions =[
             { q:"What do the three pieces of the triforce stand for?", 
-                a0: "Power, Wisdom, and Courage", 
+                a0: "the three different lands", 
                 a1:"Zelda, Ganondorf, and Link", 
                 a2:"Strength, Bravery, and Wisdom",
-                a3:"the three different lands",
-                    correctAnswer: "a0"},
+                a3:"Power, Wisdom, and Courage",
+                    correctAnswer: "Power, Wisdom, and Courage"},
             { q:"In Ocarina of Time, how does Zelda hide from Ganondorf?", 
-                a0: "diguises herself as a dude", 
+                a0: "travels to the Twilight realm", 
                 a1:"finds a cave in the mountains to hide in", 
-                a2:"travels to the Twilight realm", 
+                a2:"diguises herself as a dude", 
                 a3:"she doesn't, Zelda awaits rescue in Ganandorf's prison",
-                    correctAnswer: "a0"},
+                    correctAnswer: "diguises herself as a dude"},
+                       
             { q:"In Breath Of The Wild, what are the 4 main races?",
                 a0: "Goron, Gerudo, Hylian, and Zora", 
                 a1:"Fairy, Kokiri, Deku and Rito", 
                 a2:"Rito, Tingles, Yamatami, and Hylian", 
                 a3:"Zora, Goron, Deku, and Anouki",
-                    correctAnswer: "a0"},
-            { q:"ask different questions here3?", 
-                a0: "answer", 
-                a1: "another answer", 
-                a2: "again answer", 
-                a3: "different answer",
-                    correctAnswer: "a0"},
+                    correctAnswer: "Goron, Gerudo, Hylian, and Zora"},
+           { q:"How many timelines are there in the Legend of Zelda universe?", 
+                a0: "1", 
+                a1: "2", 
+                a2: "3", 
+                a3: "4",
+                    correctAnswer: "3"},
+            { q:"Who is Zelda the reincarnate of?", 
+                a0: "The Goddess Nayru", 
+                a1: "the Goddess Din", 
+                a2: "The Goddess Hylia", 
+                a3: "The Goddess Farore",
+                    correctAnswer: "The Goddess Hylia"},
+            { q:"In Skyward Sword, who put the curse on Zelda and Link to forever deal with their hatred?", 
+                a0: "Vaati", 
+                a1: "Ganondorf", 
+                a2: "Calamity Ganon", 
+                a3: "Demise",
+                    correctAnswer: "Demise"},
             ];
 
     // var gifArray =[]
@@ -40,17 +53,16 @@ window.onload = function() {
 //start button
 $("#button").on("click", startBtn);
 function startBtn() {
-    nextQuestion();
     document.getElementById("button").style.display = "none"
+    nextQuestion();   
 }
 
 
 //basic game functions
     function nextQuestion() {
         
-        runTimer();
-    
-        if (questioni <= (questions.length - 1)) {
+        if (questioni <= (questions.length-1)) {
+            runTimer();
                 $("#question").html(questions[questioni].q);
                 $("#answer0").html(questions[questioni].a0);
                 $("#answer1").html(questions[questioni].a1);
@@ -62,25 +74,31 @@ function startBtn() {
 
             else {
             $("#question").html("Game Over!");
-            updateCorrect()
-            updateWrong()
+            document.getElementById("answer0").style.display = "none";
+            document.getElementById("answer1").style.display = "none";
+            document.getElementById("answer2").style.display = "none";
+            document.getElementById("answer3").style.display = "none";
+            document.getElementById("countDown").style.display = "none";
+            $("#numberWrong").html("Wrong: " + wrong);
+            $("#numberCorrect").html("Correct: " + correct);
             }
         
     }
-    function updateCorrect(){
-        $("#correct").html("Correct: " + correct);
-    }
+    // function updateCorrect(){
+    //     $("#correct").html("Correct: " + correct);
+    // }
 
-    function updateWrong(){
-        $("#wrong").html("wrong: " + wrong);
-    }
+    // function updateWrong(){
+    //     $("#wrong").html("wrong: " + wrong);
+    // }
 
 
 //timer
     function decrement(){
         if (countDown === 0){
             console.log("time's up")
-            reset();
+            nextQuestion();
+            questioni++;
         }
         else {
         countDown--;
@@ -88,15 +106,14 @@ function startBtn() {
     }
     }
     function runTimer(){
+        countDown = 30;
         clearInterval(interval);
         interval = setInterval(decrement, 1000);
     }
     function reset(){
         nextQuestion()
-        
        countDown = 30;
        console.log(nextQuestion)
-
     }
 
 
@@ -107,31 +124,30 @@ function startBtn() {
     $(".btn").click(function(event){
             // stops the function
             if (questioni === questions.length) {
-            return;
+            nextQuestion()
             }
-
-        var a = $("<button>");
-        a.attr("data-name", );
-        $(".btn").append(a);  
+        console.log($(this).text())
+        let btnClicked = $(this).text();
 
             // If they guess the correct answer
-            if (a === questions[questioni].a0) {
+            if (btnClicked === questions[questioni].correctAnswer) {
                 // questions[questioni].correctAnswer) 
                 console.log("correct");
                 correct++;
-                updateCorrect();
+                // $("#correct").html("Correct: " + correct);
+                questioni++;
+                nextQuestion()
             }
             // If wrong, update score
             else {
                 console.log("Wrong!");
                 wrong ++;
-                updateWrong()
-                
-            }
-
-         questioni++;
-         nextQuestion();
+                // $("#wrong").html("wrong: " + wrong);
+                nextQuestion();
+            };
         });
 
             
 }
+// i did not have time to get a gif pop up in between each question, 
+        // i would try to have an array of gifs that relate to the question index
