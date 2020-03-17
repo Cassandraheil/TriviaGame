@@ -51,9 +51,9 @@ window.onload = function() {
     let interval;
 
 //start button
-$("#button").on("click", startBtn);
+$("#start-button").on("click", startBtn);
 function startBtn() {
-    document.getElementById("button").style.display = "none"
+    document.getElementById("start-button").style.display = "none"
     nextQuestion();   
 }
 
@@ -63,6 +63,12 @@ function startBtn() {
         
         if (questioni <= (questions.length-1)) {
             runTimer();
+                // $("#question").show();
+                // $("#answer0").show();
+                // $("#answer1").show();
+                // $("#answer2").show();
+                // $("#answer3").show(); 
+
                 $("#question").html(questions[questioni].q);
                 $("#answer0").html(questions[questioni].a0);
                 $("#answer1").html(questions[questioni].a1);
@@ -74,23 +80,14 @@ function startBtn() {
 
             else {
             $("#question").html("Game Over!");
-            document.getElementById("answer0").style.display = "none";
-            document.getElementById("answer1").style.display = "none";
+            $("#answer0").html("Correct: "+ correct);
+            $("#answer1").html("Wrong: "+ wrong);
             document.getElementById("answer2").style.display = "none";
             document.getElementById("answer3").style.display = "none";
             document.getElementById("countDown").style.display = "none";
-            $("#numberWrong").html("Wrong: " + wrong);
-            $("#numberCorrect").html("Correct: " + correct);
             }
         
     }
-    // function updateCorrect(){
-    //     $("#correct").html("Correct: " + correct);
-    // }
-
-    // function updateWrong(){
-    //     $("#wrong").html("wrong: " + wrong);
-    // }
 
 
 //timer
@@ -122,30 +119,39 @@ function startBtn() {
         
 // on click right or wrong answer, updates score
     $(".btn").click(function(event){
-            // stops the function
-            if (questioni === questions.length) {
-            nextQuestion()
-            }
-        console.log($(this).text())
-        let btnClicked = $(this).text();
 
+        console.log("this is the button text " +$(this).text())
+        let btnClicked = $(this).text();
+        console.log("this si the correct ansewr: "+ questions[questioni].correctAnswer)
             // If they guess the correct answer
             if (btnClicked === questions[questioni].correctAnswer) {
                 // questions[questioni].correctAnswer) 
                 console.log("correct");
                 correct++;
-                // $("#correct").html("Correct: " + correct);
+                // $("#question").html("Correct!");
+                // $("#answer0").hide();
+                // $("#answer1").hide();
+                // $("#answer2").hide();
+                // $("#answer3").hide();
+                // $("#countDown").hide();
                 questioni++;
-                nextQuestion()
+                nextQuestion();
             }
             // If wrong, update score
             else {
                 console.log("Wrong!");
                 wrong ++;
-                // $("#wrong").html("wrong: " + wrong);
+                // $("#question").html("Wrong :(");
+                // $("#answer0").hide();
+                // $("#answer1").hide();
+                // $("#answer2").hide();
+                // $("#answer3").hide();
+                // $("#countDown").hide(); 
+                questioni++               
                 nextQuestion();
             };
         });
+        //maybe
 
             
 }
