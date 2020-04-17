@@ -63,11 +63,15 @@ function startBtn() {
         
         if (questioni <= (questions.length-1)) {
             runTimer();
-                // $("#question").show();
-                // $("#answer0").show();
-                // $("#answer1").show();
-                // $("#answer2").show();
-                // $("#answer3").show(); 
+
+            document.getElementById("correct").style.display = "none";
+            document.getElementById("wrong").style.display = "none";
+
+            document.getElementById("answer0").style.display = "block";
+            document.getElementById("answer1").style.display = "block";
+            document.getElementById("answer2").style.display = "block";
+            document.getElementById("answer3").style.display = "block";
+            document.getElementById("countDown").style.display = "block"
 
                 $("#question").html(questions[questioni].q);
                 $("#answer0").html(questions[questioni].a0);
@@ -80,8 +84,10 @@ function startBtn() {
 
             else {
             $("#question").html("Game Over!");
-            $("#answer0").html("Correct: "+ correct);
-            $("#answer1").html("Wrong: "+ wrong);
+            $("#correct").html("Correct: "+ correct);
+            $("#wrong").html("Wrong: "+ wrong);
+            document.getElementById("answer0").style.display = "none";
+            document.getElementById("answer0").style.display = "none";
             document.getElementById("answer2").style.display = "none";
             document.getElementById("answer3").style.display = "none";
             document.getElementById("countDown").style.display = "none";
@@ -122,33 +128,50 @@ function startBtn() {
 
         console.log("this is the button text " +$(this).text())
         let btnClicked = $(this).text();
-        console.log("this si the correct ansewr: "+ questions[questioni].correctAnswer)
+        console.log("this is the correct ansewr: "+ questions[questioni].correctAnswer)
             // If they guess the correct answer
             if (btnClicked === questions[questioni].correctAnswer) {
                 // questions[questioni].correctAnswer) 
                 console.log("correct");
                 correct++;
-                // $("#question").html("Correct!");
-                // $("#answer0").hide();
-                // $("#answer1").hide();
-                // $("#answer2").hide();
-                // $("#answer3").hide();
-                // $("#countDown").hide();
+
+                document.getElementById("correct").style.display = "block";
+                document.getElementById("wrong").style.display = "block";
+
+                $("#question").html("Correct!");
+                $("#correct").html("Correct: "+ correct);
+                $("#wrong").html("Wrong: "+ wrong);
+
+                document.getElementById("answer0").style.display = "none";
+                document.getElementById("answer1").style.display = "none";
+                document.getElementById("answer2").style.display = "none";
+                document.getElementById("answer3").style.display = "none";
+                document.getElementById("countDown").style.display = "none";
+
                 questioni++;
-                nextQuestion();
+                setTimeout(nextQuestion,1000*2);
+                // nextQuestion();
             }
             // If wrong, update score
             else {
                 console.log("Wrong!");
                 wrong ++;
-                // $("#question").html("Wrong :(");
-                // $("#answer0").hide();
-                // $("#answer1").hide();
-                // $("#answer2").hide();
-                // $("#answer3").hide();
-                // $("#countDown").hide(); 
+                
+                document.getElementById("correct").style.display = "block";
+                document.getElementById("wrong").style.display = "block";
+
+                $("#question").html("Wrong!");
+                $("#correct").html("Correct: "+ correct);
+                $("#wrong").html("Wrong: "+ wrong);
+
+                document.getElementById("answer0").style.display = "none";
+                document.getElementById("answer1").style.display = "none";
+                document.getElementById("answer2").style.display = "none";
+                document.getElementById("answer3").style.display = "none";
+                document.getElementById("countDown").style.display = "none";
+                
                 questioni++               
-                nextQuestion();
+                setTimeout(nextQuestion,1000*2);
             };
         });
         //maybe
