@@ -1,4 +1,6 @@
 window.onload = function() { 
+    document.getElementById("gif").style.display = "none";
+
     var questions =[
             { q:"What do the three pieces of the triforce stand for?", 
                 a0: "the three different lands", 
@@ -37,10 +39,23 @@ window.onload = function() {
                 a2: "Calamity Ganon", 
                 a3: "Demise",
                     correctAnswer: "Demise"},
+            { q:"In Wind Waker, who does the King Of Red Lions turn out to be?", 
+                a0: "Daphnes Nohansen Hyrule", 
+                a1: "Prince Komali", 
+                a2: "Tingle", 
+                a3: "Helmaroc King",
+                    correctAnswer: "Daphnes Nohansen Hyrule"},
+            { q:"Which of the following is not one of the seven sages in Ocarina of Time", 
+                a0: "Zelda", 
+                a1: "Saria", 
+                a2: "Epona", 
+                a3: "Impa",
+                    correctAnswer: "Epona"},
+            
             ];
 
-    // var gifArray =[]
-    console.log(questions[0].correctAnswer)
+    var gifArray =["https://media.giphy.com/media/NVBR6cLvUjV9C/giphy.gif", "https://media.giphy.com/media/5MjQ87rBCRIB2/giphy.gif", "https://media.giphy.com/media/tsW2ZGhWGTQhG/giphy.gif", "https://media.giphy.com/media/YWUpVw86AtIbe/giphy.gif", "https://media.giphy.com/media/3ohjUSz7NyYWHNNQeA/giphy.gif", "https://media.giphy.com/media/144Q1gg0FkTEVG/giphy.gif", "https://media.giphy.com/media/e6mVL4gs5axZS/giphy.gif", "https://media.giphy.com/media/12ixBgnB8tVex2/giphy.gif", "https://media.giphy.com/media/WoWpouO164dBS/giphy.gif", "https://media.giphy.com/media/RkymcOKhoCRTG/giphy.gif", "https://media.giphy.com/media/PR6eLRwKaPnMaRYzVb/giphy.gif"]
+    var wrongGif =["https://media.giphy.com/media/Urc6CzW703XFajktll/giphy.gif", "https://media.giphy.com/media/DkAaVkOaj74vS/giphy.gif", "https://media.giphy.com/media/tU4DoyFpHLSIE/giphy.gif", "https://media.giphy.com/media/z3fzetnSnRjLa/giphy.gif", "https://media.giphy.com/media/3NpzwnO0KfSIo/giphy.gif", "https://media.giphy.com/media/3ohc1bjC02MJjwly9i/giphy.gif", "https://media.giphy.com/media/ClybQ8ksHCmYw/giphy.gif", "https://media.giphy.com/media/nbAXNSL8nyDHfVnNuL/giphy.gif", "https://media.giphy.com/media/z3fzetnSnRjLa/giphy.gif", "https://media.giphy.com/media/fe3NDdz8tl6Vwm4xbr/giphy.gif", "https://media.giphy.com/media/GJtfejeAtTuJa/giphy.gif", "https://media.giphy.com/media/YAa6eYva5IMEw/giphy.gif", "https://media.giphy.com/media/DIJCGh2Rq1fs4/giphy.gif"]
 
 
     let correct = 0;
@@ -66,6 +81,7 @@ function startBtn() {
 
             document.getElementById("correct").style.display = "none";
             document.getElementById("wrong").style.display = "none";
+            document.getElementById("gif").style.display = "none";
 
             document.getElementById("answer0").style.display = "block";
             document.getElementById("answer1").style.display = "block";
@@ -128,19 +144,25 @@ function startBtn() {
 
         console.log("this is the button text " +$(this).text())
         let btnClicked = $(this).text();
-        console.log("this is the correct ansewr: "+ questions[questioni].correctAnswer)
-            // If they guess the correct answer
+        console.log("this is the correct answer: "+ questions[questioni].correctAnswer)
+        // <img src="./images/crystal.jpg" alt="Blue Crystal">
+
+
             if (btnClicked === questions[questioni].correctAnswer) {
-                // questions[questioni].correctAnswer) 
+
                 console.log("correct");
                 correct++;
 
                 document.getElementById("correct").style.display = "block";
                 document.getElementById("wrong").style.display = "block";
+                document.getElementById("gif").style.display = "block";
 
                 $("#question").html("Correct!");
                 $("#correct").html("Correct: "+ correct);
                 $("#wrong").html("Wrong: "+ wrong);
+                var num = Math.floor(Math.random()* gifArray.length)
+                $("#gif").attr("src", gifArray[num])
+                console.log("the gif src", gifArray[num])
 
                 document.getElementById("answer0").style.display = "none";
                 document.getElementById("answer1").style.display = "none";
@@ -149,8 +171,7 @@ function startBtn() {
                 document.getElementById("countDown").style.display = "none";
 
                 questioni++;
-                setTimeout(nextQuestion,1000*2);
-                // nextQuestion();
+                setTimeout(nextQuestion,1000*8);
             }
             // If wrong, update score
             else {
@@ -159,10 +180,15 @@ function startBtn() {
                 
                 document.getElementById("correct").style.display = "block";
                 document.getElementById("wrong").style.display = "block";
+                document.getElementById("gif").style.display = "block";
 
                 $("#question").html("Wrong!");
                 $("#correct").html("Correct: "+ correct);
                 $("#wrong").html("Wrong: "+ wrong);
+                var num = Math.floor(Math.random()* gifArray.length)
+                console.log("random num", num)
+                $("#gif").attr("src", wrongGif[num])
+                console.log("the gif src", wrongGif[num])
 
                 document.getElementById("answer0").style.display = "none";
                 document.getElementById("answer1").style.display = "none";
@@ -171,7 +197,7 @@ function startBtn() {
                 document.getElementById("countDown").style.display = "none";
                 
                 questioni++               
-                setTimeout(nextQuestion,1000*2);
+                setTimeout(nextQuestion,1000*8);
             };
         });
         //maybe
