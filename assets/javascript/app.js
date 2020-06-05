@@ -171,7 +171,7 @@ function startBtn() {
                 document.getElementById("countDown").style.display = "none";
 
                 questioni++;
-                setTimeout(nextQuestion,1000*8);
+                setTimeout(nextQuestion,1000*7);
             }
             // If wrong, update score
             else {
@@ -197,7 +197,7 @@ function startBtn() {
                 document.getElementById("countDown").style.display = "none";
                 
                 questioni++               
-                setTimeout(nextQuestion,1000*8);
+                setTimeout(nextQuestion,1000*7);
             };
         });
         //maybe

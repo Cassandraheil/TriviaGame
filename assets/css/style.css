@@ -49,3 +49,10 @@ body {
     padding-bottom: 10px;
     border-bottom: 2px solid gray;
   }
+
+  #gif{
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  }
