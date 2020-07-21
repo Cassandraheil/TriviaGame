@@ -16,8 +16,8 @@ window.onload = function() {
                     correctAnswer: "diguises herself as a dude"},
                        
             { q:"In Breath Of The Wild, what are the 4 main races?",
-                a0: "Goron, Gerudo, Hylian, and Zora", 
-                a1:"Fairy, Kokiri, Deku and Rito", 
+                a0: "Goron, Gerudo, Rito, and Zora", 
+                a1:"Fairy, Kokiri, Deku, and Rito", 
                 a2:"Rito, Tingles, Yamatami, and Hylian", 
                 a3:"Zora, Goron, Deku, and Anouki",
                     correctAnswer: "Goron, Gerudo, Hylian, and Zora"},
