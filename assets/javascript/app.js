@@ -65,6 +65,13 @@ window.onload = function() {
     let countDown = 5;
     let interval;
 
+// hide the buttons
+document.getElementById("answer0").style.display = "none";
+document.getElementById("answer1").style.display = "none";
+document.getElementById("answer2").style.display = "none";
+document.getElementById("answer3").style.display = "none";
+document.getElementById("countDown").style.display = "none";
+
 //start button
 $("#start-button").on("click", startBtn);
 function startBtn() {
