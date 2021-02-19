@@ -71,6 +71,8 @@ document.getElementById("answer1").style.display = "none";
 document.getElementById("answer2").style.display = "none";
 document.getElementById("answer3").style.display = "none";
 document.getElementById("countDown").style.display = "none";
+document.getElementById("nextQuest").style.display = "none";
+
 
 //start button
 $("#start-button").on("click", startBtn);
@@ -89,6 +91,7 @@ function startBtn() {
             document.getElementById("correct").style.display = "none";
             document.getElementById("wrong").style.display = "none";
             document.getElementById("gif").style.display = "none";
+            document.getElementById("nextQuest").style.display = "none";
 
             document.getElementById("answer0").style.display = "block";
             document.getElementById("answer1").style.display = "block";
@@ -106,14 +109,21 @@ function startBtn() {
         
 
             else {
-            $("#question").html("Game Over!");
             $("#correct").html("Correct: "+ correct);
             $("#wrong").html("Wrong: "+ wrong);
+            if (correct > 6){
+                $("#question").html("Game Over! You are truly a Legend of Zelda Master");
+            }else if (correct > 4){
+                $("#question").html("Game Over! You did well.");
+            }else {
+                $("#question").html("Game Over! You should play the game more...");
+            }
             document.getElementById("answer0").style.display = "none";
             document.getElementById("answer0").style.display = "none";
             document.getElementById("answer2").style.display = "none";
             document.getElementById("answer3").style.display = "none";
             document.getElementById("countDown").style.display = "none";
+            document.getElementById("nextQuest").innerHTML = "play again";
             }
         
     }
@@ -163,6 +173,7 @@ function startBtn() {
                 document.getElementById("correct").style.display = "block";
                 document.getElementById("wrong").style.display = "block";
                 document.getElementById("gif").style.display = "block";
+                document.getElementById("nextQuest").style.display = "block";
 
                 $("#question").html("Correct!");
                 $("#correct").html("Correct: "+ correct);
@@ -176,6 +187,7 @@ function startBtn() {
                 document.getElementById("answer2").style.display = "none";
                 document.getElementById("answer3").style.display = "none";
                 document.getElementById("countDown").style.display = "none";
+                
 
                 questioni++;
                 setTimeout(nextQuestion,1000*7);
@@ -204,6 +216,7 @@ function startBtn() {
                 document.getElementById("countDown").style.display = "none";
                 
                 questioni++               
+                
                 setTimeout(nextQuestion,1000*7);
             };
         });
@@ -211,5 +224,4 @@ function startBtn() {
 
             
 }
-// i did not have time to get a gif pop up in between each question, 
-        // i would try to have an array of gifs that relate to the question index
+
