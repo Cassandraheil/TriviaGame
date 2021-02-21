@@ -71,7 +71,7 @@ document.getElementById("answer1").style.display = "none";
 document.getElementById("answer2").style.display = "none";
 document.getElementById("answer3").style.display = "none";
 document.getElementById("countDown").style.display = "none";
-document.getElementById("nextQuest").style.display = "none";
+// document.getElementById("nextQuest").style.display = "none";
 
 
 //start button
@@ -91,7 +91,7 @@ function startBtn() {
             document.getElementById("correct").style.display = "none";
             document.getElementById("wrong").style.display = "none";
             document.getElementById("gif").style.display = "none";
-            document.getElementById("nextQuest").style.display = "none";
+            // document.getElementById("nextQuest").style.display = "none";
 
             document.getElementById("answer0").style.display = "block";
             document.getElementById("answer1").style.display = "block";
@@ -173,7 +173,7 @@ function startBtn() {
                 document.getElementById("correct").style.display = "block";
                 document.getElementById("wrong").style.display = "block";
                 document.getElementById("gif").style.display = "block";
-                document.getElementById("nextQuest").style.display = "block";
+                // document.getElementById("nextQuest").style.display = "block";
 
                 $("#question").html("Correct!");
                 $("#correct").html("Correct: "+ correct);
@@ -190,7 +190,11 @@ function startBtn() {
                 
 
                 questioni++;
-                setTimeout(nextQuestion,1000*7);
+                // if(document.getElementById('nextQuest').clicked == true){
+                //         console.log("button was clicked")
+                // }else{
+           setTimeout(nextQuestion,1000*4);
+                // }
             }
             // If wrong, update score
             else {
@@ -200,6 +204,7 @@ function startBtn() {
                 document.getElementById("correct").style.display = "block";
                 document.getElementById("wrong").style.display = "block";
                 document.getElementById("gif").style.display = "block";
+                // document.getElementById("nextQuest").style.display = "block";
 
                 $("#question").html("Wrong!");
                 $("#correct").html("Correct: "+ correct);
@@ -217,7 +222,7 @@ function startBtn() {
                 
                 questioni++               
                 
-                setTimeout(nextQuestion,1000*7);
+                setTimeout(nextQuestion,1000*4);
             };
         });
         //maybe
